@@ -590,7 +590,7 @@ class MainWindow(QMainWindow):
             }
             QPushButton#primary {
                 background-color: #00d4ff;
-                color: #0d1117;
+                color: #ffffff;
                 border-color: #00d4ff;
                 font-size: 15px;
                 padding: 12px 24px;
@@ -1419,6 +1419,12 @@ class AchievementView(QWidget):
 def main():
     app = QApplication(sys.argv)
     app.setStyle('Fusion')
+    
+    # 设置字体，确保中文能正常显示
+    font = QFont("Microsoft YaHei UI", 10)
+    font.setStyleHint(QFont.MicrosoftYaHei)
+    app.setFont(font)
+    
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
