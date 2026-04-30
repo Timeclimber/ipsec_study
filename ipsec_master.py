@@ -1422,7 +1422,6 @@ def main():
     
     # 设置字体，确保中文能正常显示
     font = QFont("Microsoft YaHei UI", 10)
-    font.setStyleHint(QFont.MicrosoftYaHei)
     app.setFont(font)
     
     window = MainWindow()
