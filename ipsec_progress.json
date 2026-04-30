@@ -1,0 +1,15 @@
+{
+  "completed_levels": [],
+  "best_scores": {},
+  "total_attempts": 0,
+  "knowledge_read": [
+    "IPsec概述",
+    "IKE协议详解",
+    "NAT穿越",
+    "DPD与隧道维护"
+  ],
+  "achievements": [
+    "first_knowledge"
+  ],
+  "start_time": "2026-04-30T22:43:54.259874"
+}
