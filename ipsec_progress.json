@@ -1,15 +1,24 @@
 {
-  "completed_levels": [],
-  "best_scores": {},
-  "total_attempts": 0,
+  "completed_levels": [
+    1
+  ],
+  "best_scores": {
+    "1": 100
+  },
+  "total_attempts": 2,
   "knowledge_read": [
     "IPsec概述",
     "IKE协议详解",
     "NAT穿越",
-    "DPD与隧道维护"
+    "DPD与隧道维护",
+    "加密与认证算法",
+    "高可用与故障切换"
   ],
   "achievements": [
-    "first_knowledge"
+    "first_knowledge",
+    "knowledge_master",
+    "first_level",
+    "perfect_score"
   ],
   "start_time": "2026-04-30T22:43:54.259874"
 }
