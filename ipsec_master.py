@@ -495,13 +495,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.progress = ProgressManager()
-        # 设置全局字体，确保中文能正常显示
-        self.font = QFont("Microsoft YaHei UI", 10)
-        self.setFont(self.font)
         self.init_ui()
-    
-    def set_widget_font(self, widget):
-        widget.setFont(self.font)
     
     def init_ui(self):
         self.setWindowTitle('IPsec配置大师 - IPsec Configuration Master')
@@ -801,12 +795,10 @@ class MainMenu(QWidget):
         title = QLabel('IPsec配置大师')
         title.setObjectName('title')
         title.setAlignment(Qt.AlignCenter)
-        title.setFont(self.main_window.font)
         
         subtitle = QLabel('核心网工程师实践学习平台')
         subtitle.setObjectName('subtitle')
         subtitle.setAlignment(Qt.AlignCenter)
-        subtitle.setFont(self.main_window.font)
         
         layout.addSpacing(50)
         layout.addWidget(title)
@@ -819,19 +811,16 @@ class MainMenu(QWidget):
         btn_knowledge = QPushButton('📖 知识学习')
         btn_knowledge.setObjectName('primary')
         btn_knowledge.setMinimumSize(300, 50)
-        btn_knowledge.setFont(self.main_window.font)
         btn_knowledge.clicked.connect(self.main_window.show_knowledge)
         
         btn_practice = QPushButton('🎯 练习挑战')
         btn_practice.setObjectName('primary')
         btn_practice.setMinimumSize(300, 50)
-        btn_practice.setFont(self.main_window.font)
         btn_practice.clicked.connect(self.main_window.show_level_select)
         
         btn_achievement = QPushButton('🏆 成就系统')
         btn_achievement.setObjectName('primary')
         btn_achievement.setMinimumSize(300, 50)
-        btn_achievement.setFont(self.main_window.font)
         btn_achievement.clicked.connect(self.main_window.show_achievements)
         
         buttons_layout.addWidget(btn_knowledge)
@@ -844,7 +833,6 @@ class MainMenu(QWidget):
         self.stats_label = QLabel('')
         self.stats_label.setAlignment(Qt.AlignCenter)
         self.stats_label.setStyleSheet('color: #888; font-size: 14px;')
-        self.stats_label.setFont(self.main_window.font)
         layout.addWidget(self.stats_label)
         layout.addSpacing(30)
         
@@ -870,12 +858,10 @@ class KnowledgeView(QWidget):
         
         header = QHBoxLayout()
         back_btn = QPushButton('返回菜单')
-        back_btn.setFont(self.main_window.font)
         back_btn.clicked.connect(self.main_window.show_main_menu)
         
         title = QLabel('IPsec 知识库')
         title.setObjectName('section_title')
-        title.setFont(self.main_window.font)
         
         header.addWidget(back_btn)
         header.addWidget(title)
@@ -906,12 +892,10 @@ class KnowledgeView(QWidget):
             card_header = QHBoxLayout()
             icon_label = QLabel(f"{data['icon']} {name}")
             icon_label.setObjectName('card_title')
-            icon_label.setFont(self.main_window.font)
             
             read_btn = QPushButton('开始学习')
             read_btn.setObjectName('primary')
             read_btn.setFixedSize(100, 30)
-            read_btn.setFont(self.main_window.font)
             read_btn.clicked.connect(lambda checked, n=name: self.open_knowledge(n))
             
             card_header.addWidget(icon_label)
@@ -948,16 +932,13 @@ class KnowledgeDialog(QDialog):
         
         title = QLabel(f"{KNOWLEDGE_DATA[self.name]['icon']} {self.name}")
         title.setObjectName('section_title')
-        title.setFont(self.main_window.font)
         
         content = QTextEdit()
         content.setReadOnly(True)
         content.setHtml(KNOWLEDGE_DATA[self.name]['content'])
         content.setMinimumHeight(500)
-        content.setFont(self.main_window.font)
         
         close_btn = QPushButton('关闭')
-        close_btn.setFont(self.main_window.font)
         close_btn.clicked.connect(self.close)
         
         layout.addWidget(title)
@@ -980,12 +961,10 @@ class LevelSelectView(QWidget):
         
         header = QHBoxLayout()
         back_btn = QPushButton('返回菜单')
-        back_btn.setFont(self.main_window.font)
         back_btn.clicked.connect(self.main_window.show_main_menu)
         
         title = QLabel('练习挑战')
         title.setObjectName('section_title')
-        title.setFont(self.main_window.font)
         
         header.addWidget(back_btn)
         header.addWidget(title)
@@ -1021,7 +1000,6 @@ class LevelSelectView(QWidget):
             
             level_num = QLabel(f"第 {level['id']} 关")
             level_num.setObjectName('card_title')
-            level_num.setFont(self.main_window.font)
             
             difficulty_colors = {
                 '入门': '#4caf50',
@@ -1032,12 +1010,10 @@ class LevelSelectView(QWidget):
             }
             diff_label = QLabel(level['difficulty'])
             diff_label.setStyleSheet(f'color: {difficulty_colors.get(level["difficulty"], "#fff")}; font-weight: bold;')
-            diff_label.setFont(self.main_window.font)
             
             status_label = QLabel('已完成' if level['id'] in completed else '未解锁')
             if level['id'] in completed:
                 status_label.setStyleSheet('color: #4caf50;')
-            status_label.setFont(self.main_window.font)
             
             header_layout.addWidget(level_num)
             header_layout.addWidget(diff_label)
@@ -1046,20 +1022,16 @@ class LevelSelectView(QWidget):
             
             name_label = QLabel(level['name'])
             name_label.setStyleSheet('font-size: 18px; color: #fff; margin: 5px 0;')
-            name_label.setFont(self.main_window.font)
             
             desc_label = QLabel(level['description'])
             desc_label.setStyleSheet('color: #888;')
-            desc_label.setFont(self.main_window.font)
             
             score_label = QLabel(f'最高分: {scores.get(level["id"], "-")} / 100')
             score_label.setObjectName('score')
-            score_label.setFont(self.main_window.font)
             
             start_btn = QPushButton('开始挑战')
             start_btn.setObjectName('primary')
             start_btn.setFixedSize(120, 35)
-            start_btn.setFont(self.main_window.font)
             start_btn.clicked.connect(lambda checked, lid=level['id']: self.main_window.start_level(lid))
             
             card_layout.addLayout(header_layout)
@@ -1089,16 +1061,13 @@ class GameView(QWidget):
         
         header = QHBoxLayout()
         self.back_btn = QPushButton('返回')
-        self.back_btn.setFont(self.main_window.font)
         self.back_btn.clicked.connect(self.main_window.show_level_select)
         
         self.level_title = QLabel('')
         self.level_title.setObjectName('section_title')
-        self.level_title.setFont(self.main_window.font)
         
         self.score_display = QLabel('得分: 0 / 100')
         self.score_display.setObjectName('score')
-        self.score_display.setFont(self.main_window.font)
         
         header.addWidget(self.back_btn)
         header.addWidget(self.level_title)
@@ -1120,7 +1089,6 @@ class GameView(QWidget):
         self.scenario_label = QLabel('')
         self.scenario_label.setWordWrap(True)
         self.scenario_label.setStyleSheet('padding: 10px; color: #c9d1d9;')
-        self.scenario_label.setFont(self.main_window.font)
         scenario_layout = QVBoxLayout()
         scenario_layout.addWidget(self.scenario_label)
         self.scenario_group.setLayout(scenario_layout)
@@ -1134,7 +1102,6 @@ class GameView(QWidget):
         self.tips_label = QLabel('')
         self.tips_label.setWordWrap(True)
         self.tips_label.setStyleSheet('padding: 10px; color: #ffeb3b;')
-        self.tips_label.setFont(self.main_window.font)
         tips_layout = QVBoxLayout()
         tips_layout.addWidget(self.tips_label)
         self.tips_group.setLayout(tips_layout)
@@ -1151,7 +1118,6 @@ class GameView(QWidget):
         self.reference_label = QLabel('')
         self.reference_label.setStyleSheet('padding: 10px; font-family: Consolas, monospace; color: #c9d1d9; white-space: pre;')
         self.reference_label.setWordWrap(True)
-        self.reference_label.setFont(self.main_window.font)
         ref_layout = QVBoxLayout()
         ref_layout.addWidget(self.reference_label)
         self.reference_group.setLayout(ref_layout)
@@ -1159,7 +1125,6 @@ class GameView(QWidget):
         self.knowledge_group = QGroupBox('推荐学习资料')
         self.knowledge_list = QListWidget()
         self.knowledge_list.itemDoubleClicked.connect(self.on_knowledge_clicked)
-        self.knowledge_list.setFont(self.main_window.font)
         know_layout = QVBoxLayout()
         know_layout.addWidget(self.knowledge_list)
         self.knowledge_group.setLayout(know_layout)
@@ -1168,17 +1133,14 @@ class GameView(QWidget):
         self.submit_btn = QPushButton('提交答案')
         self.submit_btn.setObjectName('success')
         self.submit_btn.setMinimumHeight(40)
-        self.submit_btn.setFont(self.main_window.font)
         self.submit_btn.clicked.connect(self.submit_answer)
         
         self.hint_btn = QPushButton('显示提示')
         self.hint_btn.setMinimumHeight(40)
-        self.hint_btn.setFont(self.main_window.font)
         self.hint_btn.clicked.connect(self.show_hint)
         
         self.show_ref_btn = QPushButton('显示参考')
         self.show_ref_btn.setMinimumHeight(40)
-        self.show_ref_btn.setFont(self.main_window.font)
         self.show_ref_btn.clicked.connect(self.show_reference)
         
         buttons_layout.addWidget(self.hint_btn)
@@ -1243,7 +1205,6 @@ class GameView(QWidget):
         if field['type'] == 'combo':
             widget = QComboBox()
             widget.addItems(field['options'])
-            widget.setFont(self.main_window.font)
             if 'default' in field:
                 idx = field['options'].index(field['default']) if field['default'] in field['options'] else 0
                 widget.setCurrentIndex(idx)
@@ -1251,19 +1212,15 @@ class GameView(QWidget):
             widget = QSpinBox()
             widget.setRange(field['min'], field['max'])
             widget.setValue(field['default'])
-            widget.setFont(self.main_window.font)
         elif field['type'] == 'check':
             widget = QCheckBox()
             widget.setChecked(field['default'])
-            widget.setFont(self.main_window.font)
         elif field['type'] == 'text':
             widget = QLineEdit()
             widget.setText(field['default'])
             widget.setPlaceholderText(f'请输入{field["label"]}')
-            widget.setFont(self.main_window.font)
         else:
             widget = QLineEdit()
-            widget.setFont(self.main_window.font)
         return widget
     
     def get_user_answer(self):
@@ -1370,12 +1327,10 @@ class AchievementView(QWidget):
         
         header = QHBoxLayout()
         back_btn = QPushButton('返回菜单')
-        back_btn.setFont(self.main_window.font)
         back_btn.clicked.connect(self.main_window.show_main_menu)
         
         title = QLabel('成就系统')
         title.setObjectName('section_title')
-        title.setFont(self.main_window.font)
         
         header.addWidget(back_btn)
         header.addWidget(title)
@@ -1408,29 +1363,21 @@ class AchievementView(QWidget):
         knowledge_read = len(progress['knowledge_read'])
         
         label1 = QLabel('总尝试次数:')
-        label1.setFont(self.main_window.font)
         value1 = QLabel(str(total_attempts))
-        value1.setFont(self.main_window.font)
         stats_layout.addRow(label1, value1)
         
         label2 = QLabel('关卡完成:')
-        label2.setFont(self.main_window.font)
         value2 = QLabel(f'{completed} / 5')
-        value2.setFont(self.main_window.font)
         stats_layout.addRow(label2, value2)
         
         label3 = QLabel('知识点阅读:')
-        label3.setFont(self.main_window.font)
         value3 = QLabel(f'{knowledge_read} / 6')
-        value3.setFont(self.main_window.font)
         stats_layout.addRow(label3, value3)
         
         if progress['completed_levels']:
             avg_score = sum(progress['best_scores'].values()) / len(progress['best_scores'])
             label4 = QLabel('平均分:')
-            label4.setFont(self.main_window.font)
             value4 = QLabel(f'{avg_score:.1f}')
-            value4.setFont(self.main_window.font)
             stats_layout.addRow(label4, value4)
         
         stats_group.setLayout(stats_layout)
@@ -1456,17 +1403,14 @@ class AchievementView(QWidget):
             text_layout = QVBoxLayout()
             name_label = QLabel(name)
             name_label.setObjectName('card_title')
-            name_label.setFont(self.main_window.font)
             desc_label = QLabel(desc)
             desc_label.setStyleSheet('color: #8b949e;')
-            desc_label.setFont(self.main_window.font)
             text_layout.addWidget(name_label)
             text_layout.addWidget(desc_label)
             
             status_label = QLabel('已解锁' if key in progress['achievements'] else '未解锁')
             if key in progress['achievements']:
                 status_label.setStyleSheet('color: #4caf50;')
-            status_label.setFont(self.main_window.font)
             
             card_layout.addLayout(text_layout)
             card_layout.addStretch()
