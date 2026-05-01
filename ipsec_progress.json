@@ -12,7 +12,8 @@
     "NAT穿越",
     "DPD与隧道维护",
     "加密与认证算法",
-    "高可用与故障切换"
+    "高可用与故障切换",
+    "IPsec安全架构"
   ],
   "achievements": [
     "first_knowledge",
